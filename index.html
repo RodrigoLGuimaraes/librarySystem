@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+    <title>Static Tabs</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <link rel='stylesheet prefetch' href='https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.1/angular-material.css'>
+    <link rel='stylesheet prefetch' href='https://material.angularjs.org/1.1.1/docs.css'>
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="css/style.css">
+
+  </head>
+
+  <body>
+
+    <div class="title">
+      <h1>Library System v1</h1>
+      <h3 style="margin-right: 10px;">Por Hudo Cim Assenço e Rodrigo Longhi Guimarães</h3>
+    </div>
+
+    <div class="topHeader">
+      <img src="images/top.jpg" width="100%" class="imageOverflow"/>
+    </div>
+
+      <div ng-controller="AppCtrl" ng-cloak="" class="tabsdemoStaticTabs" ng-app="MyApp">
+        <md-content class="md-padding" style="background: url('images/bg2.png'); background-repeat: repeat; background-color: rgba(0,0,0,0); width: 96%; margin: auto" ng-hide="data.signedIn">
+          <input type="text" placeholder="USERNAME" ng-model="username" class="form-control" style="margin: auto"/>
+          <br/>
+          <md-button class="md-warn" ng-click="handleSignin(username)" style="background: black; margin: auto;">SIGN IN</md-button>
+        </md-content>
+
+
+    <md-content class="md-padding" style="background: url('images/bg2.png'); background-repeat: repeat; width: 96%; margin: auto;" ng-show="data.signedIn">
+      <h2>Bem vindo {{data.username}}.</h2>
+      <md-tabs class="md-accent" md-selected="data.selectedIndex" md-align-tabs="{{data.bottom ? 'bottom' : 'top'}}" md-stretch-tabs="always">
+        <md-tab id="tab1">
+          <md-tab-label>Meus Livros</md-tab-label>
+          <md-tab-body>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th>Livro</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="book in data.books">
+                  <td>
+                    <label class="btn btn-primary">
+                      <input type="radio" value="{{book.toString}}" name="book" ng-model="data.selectedBook" class="user-type-rdo md-warn md-hue-2" >{{book.toString}}</input>
+                    </label>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </md-tab-body>
+        </md-tab>
+        <md-tab id="tab2">
+          <md-tab-label>Pesquisar Acervo</md-tab-label>
+          <md-tab-body>
+            <div class="btn-group">
+            <input type="text" ng-model="searchQuery" placeholder="Put your search term here" class="form-control form-inline"/>
+            <label class="btn btn-primary" style="margin-top: -10px" ng-click="handleSearch(searchQuery)">
+              <img class="mg-warn" src="images/lupa.png"  height="20px" width="20px"/> <br/>
+            </label>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th>Livro</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="book in data.resultBooks">
+                  <td>
+                    <label class="btn btn-primary">
+                      <input type="radio" value="{{book.toString}}" ng-model="data.selectedBook" class="user-type-rdo md-warn md-hue-2" > {{book.toString}}</input>
+                    </label>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </md-tab-body>
+        </md-tab>
+      </md-tabs>
+      <!--
+      <md-checkbox ng-model="data.bottom" aria-label="Align tabs to bottom?">
+      </md-checkbox>
+      -->
+
+        <div class="md-padding" layout="row" layout-sm="column" layout-align="left center" style="padding-top: 0;">
+          <md-button class="md-warn" ng-show="data.selectedIndex === 1" ng-click="handleEmprestimo(data.selectedBook)" style="background: black; margin: auto;">EMPRESTAR/RESERVAR LIVRO</md-button>
+          <md-button class="md-warn" ng-show="data.selectedIndex === 0" ng-click="handleDevolucao(data.selectedBook)" style="background: black; margin: auto;">DEVOLVER LIVRO</md-button>
+        </div>
+    </md-content>
+  </div>
+
+<!--
+Copyright 2016 Google Inc. All Rights Reserved. 
+Use of this source code is governed by an MIT-style license that can be foundin the LICENSE file at http://material.angularjs.org/HEAD/license.
+-->
+
+<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js'></script>
+<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js'></script>
+<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.min.js'></script>
+<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js'></script>
+<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js'></script>
+<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/svg-assets-cache.js'></script>
+<script src='https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.1/angular-material.js'></script>
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<script src="js/index.js"></script>
+
+  <script>
+    function getSelectedBook()
+    {
+      return $('input[name="book"]:checked').val();
+    }
+  </script>
+
+    
+    
+  </body>
+</html>
