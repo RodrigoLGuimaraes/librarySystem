@@ -23,14 +23,14 @@
     </div>
 
       <div ng-controller="AppCtrl" ng-cloak="" class="tabsdemoStaticTabs" ng-app="MyApp">
-        <md-content class="md-padding" style="background: url('images/bg2.png'); background-repeat: repeat; background-color: rgba(0,0,0,0); width: 96%; margin: auto" ng-hide="data.signedIn">
+        <md-content class="md-padding" style="background: url('images/bg.jpg'); background-repeat: repeat; background-color: rgba(0,0,0,0); width: 96%; margin: auto" ng-hide="data.signedIn">
           <input type="text" placeholder="USERNAME" ng-model="username" class="form-control" style="margin: auto"/>
           <br/>
           <md-button class="md-warn" ng-click="handleSignin(username)" style="background: black; margin: auto;">SIGN IN</md-button>
         </md-content>
 
 
-    <md-content class="md-padding" style="background: url('images/bg2.png'); background-repeat: repeat; width: 96%; margin: auto;" ng-show="data.signedIn">
+    <md-content class="md-padding" style="background: url('images/bg.jpg'); background-repeat: repeat; width: 96%; margin: auto;" ng-show="data.signedIn">
       <h2>Bem vindo {{data.username}}.</h2>
       <md-tabs class="md-accent" md-selected="data.selectedIndex" md-align-tabs="{{data.bottom ? 'bottom' : 'top'}}" md-stretch-tabs="always">
         <md-tab id="tab1">
@@ -47,7 +47,7 @@
                 <tr ng-repeat="book in data.books">
                   <td>
                     <label class="btn btn-primary">
-                      <input type="radio" value="{{book.toString}}" name="book" ng-model="data.selectedBook" class="user-type-rdo md-warn md-hue-2" >{{book.toString}}</input>
+                      <input type="radio" value="{{book.name}}" name="book" ng-model="data.selectedBook" class="user-type-rdo md-warn md-hue-2" >{{book.name}}</input>
                     </label>
                   </td>
                 </tr>
@@ -76,7 +76,7 @@
                 <tr ng-repeat="book in data.resultBooks">
                   <td>
                     <label class="btn btn-primary">
-                      <input type="radio" value="{{book.toString}}" ng-model="data.selectedBook" class="user-type-rdo md-warn md-hue-2" > {{book.toString}}</input>
+                      <input type="radio" value="{{book.name}}" ng-model="data.selectedBook" class="user-type-rdo md-warn md-hue-2" > {{toString(book)}}</input>
                     </label>
                   </td>
                 </tr>
